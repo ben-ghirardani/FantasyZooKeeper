@@ -106,11 +106,22 @@ public class Enclosure {
     }
 
 
-//    Method to check visitor funds, release them if they enough money, transfer them to the
+//    Method to check visitor funds, release them if they have enough money, transfer them to the
 //    creature enclosure if not. Do an agility check against the predators in the enclosure to see
 //    if they can escape and move them out if so, move them into the predator's belly if not.
 
 //    Use Casting here.
+
+    public String removeVisitorIfTheyHaveMoney(Visitor visitor) {
+        if (visitor.visitorFunds() <= 0) {
+//            remove visitor from seating first?
+            Enclosable entity = visitor;
+            addToCreatureEnclosure(entity);
+            return "A visitor has entered the creature enclosure.";
+        } else {
+
+        }
+    }
 
 
 
