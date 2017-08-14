@@ -130,8 +130,25 @@ public class Enclosure {
         return numberOfDragons;
     }
 
-    //    Use the instanceof operator to check if items in an array are an 'instance of' a class.
-    //    In this case could check for dragons or visitors.
+
+    //    Check for instances of a predator. Cast them into their original form and record their
+    //    agility. Check for instances of Visitors. If their agility is less than the predator
+    //    agility put them in it's belly ArrayList.
+
+
+    //    Test method to loop through an arraylist, check for 'instances of' Dragon, cast the
+    //    object as a Dragon and run a method available to Dragons.
+
+    public int comparePredatorAgilityToVisitors() {
+        int predatorAgility = 0;
+        for (Enclosable entity : creatureEnclosure) {
+            if (entity instanceof Dragon) {
+                Dragon original = (Dragon) entity;
+                predatorAgility = original.getAgility();
+            }
+        }
+        return predatorAgility;
+    }
 
 
 }
