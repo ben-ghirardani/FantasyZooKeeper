@@ -4,22 +4,35 @@ package com.example.user.fantasyzoomanager;
  * Created by user on 10/08/2017.
  */
 
-public class Visitor {
+public class Visitor implements Enclosable {
 
     private String name;
-    private int money;
+    public int money;
+    private int agility;
+    private boolean predator;
 
-    public Visitor(String name, int money) {
-        this.money = money;
+    public Visitor(String name, int money, int agility, boolean predator) {
         this.name = name;
+        this.money = money;
+        this.agility = agility;
+        this.predator = predator;
+
     }
 
-    public int showVisitorFunds() {
+    public String getName() {
+        return this.name;
+    }
+
+    public int visitorFunds() {
         return this.money;
     }
 
-    public String showVisitorName() {
-        return this.name;
+    public int visitorAgility() {
+        return this.agility;
+    }
+
+    public boolean isPredator() {
+        return this.predator;
     }
 
 }

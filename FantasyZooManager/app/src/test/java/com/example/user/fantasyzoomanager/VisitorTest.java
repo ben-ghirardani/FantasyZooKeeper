@@ -14,16 +14,21 @@ public class VisitorTest {
     Visitor visitor;
 
     @Before
-    public void before() { visitor = new Visitor("Clive", 10); }
+    public void before() { visitor = new Visitor("Clive", 10, 7, false); }
 
     @Test
     public void canGetVisitorFunds() {
-        assertEquals(10, visitor.showVisitorFunds());
+        assertEquals(10, visitor.visitorFunds());
     }
 
     @Test
     public void canGetVisitorName() {
-        assertEquals("Clive", visitor.showVisitorName());
+        assertEquals("Clive", visitor.getName());
+    }
+
+    @Test
+    public void canGetVisitorAgility() {
+        assertEquals(7, visitor.visitorAgility());
     }
 
 }

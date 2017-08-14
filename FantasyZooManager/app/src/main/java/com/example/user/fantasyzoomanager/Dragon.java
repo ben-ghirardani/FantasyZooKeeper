@@ -1,15 +1,12 @@
 package com.example.user.fantasyzoomanager;
 
-import java.util.ArrayList;
-
 /**
- * Created by user on 11/08/2017.
+ * Created by user on 13/08/2017.
  */
 
-public class Unicorn extends Creature {
+public class Dragon extends Creature {
 
-
-    public Unicorn(int agility, boolean predator, String name, String type) {
+    public Dragon(int agility, boolean predator, String name, String type) {
         super(agility, predator, name, type);
     }
 
@@ -30,6 +27,5 @@ public class Unicorn extends Creature {
         }
         return count;
     }
-
 
 }
