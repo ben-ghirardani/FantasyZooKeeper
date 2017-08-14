@@ -93,7 +93,6 @@ public class Enclosure {
 
 //        Method to make sure only one predator can be added to an enclosure.
 
-//    Can I pull out the name of the creature that's already there?
 
     public String addCreatureToEnclosureCheckPredator(Creature creature) {
         if (this.countPredatorsInCreatureEnclosure() > 0 && creature.predator == true) {
@@ -105,22 +104,23 @@ public class Enclosure {
         }
     }
 
-
 //    Method to check visitor funds, release them if they have enough money, transfer them to the
-//    creature enclosure if not. Do an agility check against the predators in the enclosure to see
-//    if they can escape and move them out if so, move them into the predator's belly if not.
-
-//    Use Casting here.
+//    creature enclosure if not.
 
     public String removeVisitorIfTheyHaveMoney(Visitor visitor) {
         if (visitor.visitorFunds() <= 0) {
-//            remove visitor from seating first?
-            Enclosable entity = visitor;
-            addToCreatureEnclosure(entity);
+            visitorSeating.remove(visitor);
+            addToCreatureEnclosure(visitor);
             return "A visitor has entered the creature enclosure.";
         } else {
-
+            visitorSeating.remove(visitor);
+            return visitor.getName() + " has left the enclosure and still has money to spend.";
         }
+    }
+
+    public void isVisitorEaten() {
+        int creatureAgility = 0;
+        for (Enclosable )
     }
 
 

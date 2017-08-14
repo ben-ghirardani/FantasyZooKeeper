@@ -23,7 +23,7 @@ public class EnclosureTest {
     public void before() {
         unicornEnclosure = new Enclosure("Unicorn Enclosure", 5);
         dragonEnclosure = new Enclosure("Dragon Enclosure", 7);
-        visitor1 = new Visitor ("Frank", 10, 5, false);
+        visitor1 = new Visitor ("Frank", 7, 5, false);
         dragon1 = new Dragon(15, true, "Edward", "Dragon");
         dragon2 = new Dragon(14, true, "Fabian", "Dragon");
     }
@@ -86,7 +86,7 @@ public class EnclosureTest {
         System.out.println("Number of visitors: " + unicornEnclosure.countVisitors());
         System.out.println(visitor1.getName() + " has " + visitor1.money + " money remaining.");
         assertEquals(1, unicornEnclosure.countVisitors());
-        assertEquals(5, visitor1.visitorFunds());
+        assertEquals(2, visitor1.visitorFunds());
     }
 
     @Test
@@ -102,6 +102,16 @@ public class EnclosureTest {
         dragonEnclosure.addCreatureToEnclosureCheckPredator(dragon1);
         assertEquals(1, dragonEnclosure.countCreatures());
         dragonEnclosure.addCreatureToEnclosureCheckPredator(dragon2);
+        assertEquals(1, dragonEnclosure.countCreatures());
+    }
+
+    @Test
+    public void removeVisitorIfTheyHaveMoney() {
+        dragonEnclosure.addVisitorToSeatingAndPay(visitor1);
+        assertEquals(1, dragonEnclosure.countVisitors());
+        assertEquals(0, visitor1.visitorFunds());
+        dragonEnclosure.removeVisitorIfTheyHaveMoney(visitor1);
+        assertEquals(0, dragonEnclosure.countVisitors());
         assertEquals(1, dragonEnclosure.countCreatures());
     }
 
