@@ -118,12 +118,20 @@ public class Enclosure {
         }
     }
 
-    public void isVisitorEaten() {
-        int creatureAgility = 0;
-        for (Enclosable )
+//    This is a test method to check the functionality of the 'instance of' operator.
+
+    public int findDragonInArrayOfItems() {
+        int numberOfDragons = 0;
+        for (Enclosable entity : creatureEnclosure) {
+            if (entity instanceof Dragon) {
+                numberOfDragons++;
+            }
+        }
+        return numberOfDragons;
     }
 
-
+    //    Use the instanceof operator to check if items in an array are an 'instance of' a class.
+    //    In this case could check for dragons or visitors.
 
 
 }

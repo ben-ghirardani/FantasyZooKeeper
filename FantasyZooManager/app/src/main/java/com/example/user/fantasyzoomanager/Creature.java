@@ -28,6 +28,14 @@ public abstract class Creature implements Enclosable {
         return this.name;
     }
 
+    public int getAgility() {
+        return this.agility;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
     public void addToBelly(Enclosable morsel) {
         belly.add(morsel);
     }
@@ -38,6 +46,16 @@ public abstract class Creature implements Enclosable {
 
     public boolean isPredator() {
         return this.predator;
+    }
+
+    public int countBelly() {
+        int count = 0;
+        for (Enclosable enclosable : belly) {
+            if (enclosable != null) {
+                count++;
+            }
+        }
+        return count;
     }
 
 }

@@ -16,6 +16,8 @@ public class EnclosureTest {
     Enclosure unicornEnclosure;
     Enclosure dragonEnclosure;
     Visitor visitor1;
+    Visitor visitor2;
+    Visitor visitor3;
     Dragon dragon1;
     Dragon dragon2;
 
@@ -24,6 +26,8 @@ public class EnclosureTest {
         unicornEnclosure = new Enclosure("Unicorn Enclosure", 5);
         dragonEnclosure = new Enclosure("Dragon Enclosure", 7);
         visitor1 = new Visitor ("Frank", 7, 5, false);
+        visitor2 = new Visitor ("Mary", 6, 9, false);
+        visitor3 = new Visitor ("Melody", 45, 11, false);
         dragon1 = new Dragon(15, true, "Edward", "Dragon");
         dragon2 = new Dragon(14, true, "Fabian", "Dragon");
     }
@@ -114,5 +118,16 @@ public class EnclosureTest {
         assertEquals(0, dragonEnclosure.countVisitors());
         assertEquals(1, dragonEnclosure.countCreatures());
     }
+
+    @Test
+    public void findDragonInArrayOfItems() {
+        dragonEnclosure.addToCreatureEnclosure(dragon1);
+        dragonEnclosure.addToCreatureEnclosure(visitor1);
+        dragonEnclosure.addToCreatureEnclosure(visitor2);
+        dragonEnclosure.addToCreatureEnclosure(visitor3);
+        assertEquals(4, dragonEnclosure.countCreatures());
+        assertEquals(1, dragonEnclosure.findDragonInArrayOfItems());
+    }
+
 
 }

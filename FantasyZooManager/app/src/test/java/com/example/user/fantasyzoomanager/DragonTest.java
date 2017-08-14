@@ -20,6 +20,10 @@ public class DragonTest {
         visitor1 = new Visitor ("Frank", 10, 5, false);
     }
 
+    @Test
+    public void checkDragonCanRoar() {
+        assertEquals("Rarrr!", dragon.dragonRoars());
+    }
 
     @Test
     public void checkIfPredator() {

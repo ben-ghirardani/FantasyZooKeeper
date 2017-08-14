@@ -10,22 +10,8 @@ public class Dragon extends Creature {
         super(agility, predator, name, type);
     }
 
-    public int getAgility() {
-        return this.agility;
-    }
-
-    public String getType() {
-        return this.type;
-    }
-
-    public int countBelly() {
-        int count = 0;
-        for (Enclosable enclosable : belly) {
-            if (enclosable != null) {
-                count++;
-            }
-        }
-        return count;
+    public String dragonRoars() {
+        return "Rarrr!";
     }
 
 }
