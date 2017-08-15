@@ -31,4 +31,68 @@ package com.example.user.fantasyzoomanager;
 //    interface as this would be shared).
 
 public class notes {
+
+
+//    public void resolveVisitorsInEnclosure() {
+//        int predatorAgility = 0;
+//        int enclosureOccupants = countCreatures();
+//        for (Enclosable beast : creatureEnclosure) {
+//            if (beast instanceof Dragon) {
+//                Dragon originalDragon = (Dragon) beast;
+//                predatorAgility = originalDragon.getAgility();
+//            } else for (Enclosable person : creatureEnclosure) {
+//                if (person instanceof Visitor) {
+//                    Visitor originalVisitor = (Visitor) person;
+//                    if (originalVisitor.visitorAgility() <= predatorAgility) {
+//                        creatureEnclosure.remove(person);
+//                        for (Enclosable sameBeast : creatureEnclosure) {
+//                            if (beast instanceof Dragon) {
+//                                Dragon originalDragon = (Dragon) beast;
+//                                originalDragon.addToBelly(person);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//
+//        }
+//    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+

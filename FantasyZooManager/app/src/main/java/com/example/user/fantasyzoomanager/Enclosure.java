@@ -136,19 +136,52 @@ public class Enclosure {
     //    agility put them in it's belly ArrayList.
 
 
-    //    Test method to loop through an arraylist, check for 'instances of' Dragon, cast the
-    //    object as a Dragon and run a method available to Dragons.
+    //    Test method to loop through an arraylist, check for 'instances of' the Dragon class,
+    //    cast the object as a Dragon and run a method available only to Dragons.
 
     public int comparePredatorAgilityToVisitors() {
         int predatorAgility = 0;
         for (Enclosable entity : creatureEnclosure) {
             if (entity instanceof Dragon) {
-                Dragon original = (Dragon) entity;
-                predatorAgility = original.getAgility();
+                Dragon originalDragon = (Dragon) entity;
+                predatorAgility = originalDragon.getAgility();
             }
         }
         return predatorAgility;
     }
+
+
+    // To remove Visitors based on comparison to Creature agility.
+
+    // While loop. While there is 1 predator and more than one entity in the enclosure,
+    // loop through and compare the visitor agility to the predator agility. Remove them from the
+    // arraylist if they win, add them to the belly.
+
+
+    public void resolveVisitorsInEnclosure() {
+        int currentOccupants = countCreatures();
+        int predatorAgility = 0;
+        Dragon originalDragon = null;
+        Visitor originalVisitor = null;
+        for (Enclosable beast : creatureEnclosure) {
+            if (beast instanceof Dragon) {
+                originalDragon = (Dragon) beast;
+                predatorAgility = originalDragon.getAgility();
+            }
+        }
+        while (currentOccupants > 1) {
+            for (Enclosable person : creatureEnclosure) {
+                if (person instanceof Visitor) {
+                    originalVisitor = (Visitor) person;
+                }
+            }
+            if (originalVisitor.visitorAgility() <= predatorAgility && originalVisitor != null);
+            removeFromCreatureEnclosure(originalVisitor);
+            originalDragon.addToBelly(originalVisitor);
+            currentOccupants = countCreatures();
+        }
+    }
+
 
 
 }

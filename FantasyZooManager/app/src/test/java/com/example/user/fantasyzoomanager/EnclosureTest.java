@@ -138,5 +138,15 @@ public class EnclosureTest {
         assertEquals(15, dragonEnclosure.comparePredatorAgilityToVisitors());
     }
 
+    @Test
+    public void resolveVisitorsInEnclosure() {
+        dragonEnclosure.addToCreatureEnclosure(dragon1);
+        dragonEnclosure.addToCreatureEnclosure(visitor1);
+        dragonEnclosure.addToCreatureEnclosure(visitor2);
+        dragonEnclosure.addToCreatureEnclosure(visitor3);
+        dragonEnclosure.resolveVisitorsInEnclosure();
+        assertEquals(3, dragon1.countBelly());
+    }
+
 
 }
