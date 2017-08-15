@@ -158,7 +158,7 @@ public class Enclosure {
     // arraylist if they win, add them to the belly.
 
 
-    public void resolveVisitorsInEnclosure() {
+    public void resolveVisitorsInDragonEnclosure() {
         int currentOccupants = countCreatures();
         int predatorAgility = 0;
         Dragon originalDragon = null;
@@ -175,10 +175,28 @@ public class Enclosure {
                     originalVisitor = (Visitor) person;
                 }
             }
-            if (originalVisitor.visitorAgility() <= predatorAgility && originalVisitor != null);
+            if (originalVisitor.visitorAgility() <= predatorAgility && originalVisitor != null) {
             removeFromCreatureEnclosure(originalVisitor);
             originalDragon.addToBelly(originalVisitor);
             currentOccupants = countCreatures();
+            } else {
+                creatureEnclosure.remove(originalVisitor);
+            }
+        }
+    }
+
+
+
+    //  Create a loop similar to the one above for the Unicorn enclosure. Unicorns are nice so
+    //  they will assist visitors instead of eating them.
+
+    public void  resolveVisitorsInUnicornEnclosure() {
+        int currentNumVisitors = 0;
+        Visitor originalVisitor = null;
+        for (Enclosable person : creatureEnclosure) {
+            if (person instanceof Visitor) {
+                currentNumVisitors++;
+            }
         }
     }
 

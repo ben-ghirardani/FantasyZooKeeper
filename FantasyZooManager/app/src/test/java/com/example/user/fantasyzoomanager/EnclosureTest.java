@@ -27,7 +27,7 @@ public class EnclosureTest {
         dragonEnclosure = new Enclosure("Dragon Enclosure", 7);
         visitor1 = new Visitor ("Frank", 7, 5, false);
         visitor2 = new Visitor ("Mary", 6, 9, false);
-        visitor3 = new Visitor ("Melody", 45, 11, false);
+        visitor3 = new Visitor ("Melody", 45, 16, false);
         dragon1 = new Dragon(15, true, "Edward", "Dragon");
         dragon2 = new Dragon(14, true, "Fabian", "Dragon");
     }
@@ -139,13 +139,15 @@ public class EnclosureTest {
     }
 
     @Test
-    public void resolveVisitorsInEnclosure() {
+    public void resolveVisitorsInDragonEnclosure() {
         dragonEnclosure.addToCreatureEnclosure(dragon1);
         dragonEnclosure.addToCreatureEnclosure(visitor1);
         dragonEnclosure.addToCreatureEnclosure(visitor2);
         dragonEnclosure.addToCreatureEnclosure(visitor3);
-        dragonEnclosure.resolveVisitorsInEnclosure();
-        assertEquals(3, dragon1.countBelly());
+        assertEquals(4, dragonEnclosure.countCreatures());
+        dragonEnclosure.resolveVisitorsInDragonEnclosure();
+        assertEquals(2, dragon1.countBelly());
+        assertEquals(1, dragonEnclosure.countCreatures());
     }
 
 
