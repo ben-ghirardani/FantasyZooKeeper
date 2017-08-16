@@ -15,6 +15,7 @@ public class Dragon extends Creature {
         this.belly = new ArrayList<Enclosable>();
     }
 
+
     public String dragonRoars() {
         return "Rarrr!";
     }

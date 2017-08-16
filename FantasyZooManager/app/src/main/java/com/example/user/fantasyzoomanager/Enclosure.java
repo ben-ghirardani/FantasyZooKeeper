@@ -242,7 +242,8 @@ public class Enclosure {
     }
 
     // Write a unifying method that takes in a dragon and a few unicorns, and compares agility
-    // to see whether visitors are eaten or provided with money.
+    // to see whether visitors are eaten or provided with money. First attempt, hacked together
+    // from several other methods, could be more concise.
 
     public void resolveVisitorsInGenPop() {
         int currentNumVisitors = countVisitorsInCreatureEnclosure();
@@ -295,8 +296,57 @@ public class Enclosure {
             }
     }
 
-    //  Try and re-write the method above to be much more simple.
+    //  Re-write of the method above to be DRY-er.
 
+    public void resolveVisitorsInGenPopV2() {
+//       Initialize variables.
+        int currentNumVisitors = countVisitorsInCreatureEnclosure();
+        int dragonAgility = 0;
+        ArrayList<Integer> unicornAgilityList = new ArrayList<>();
+        Dragon originalDragon = null;
+        Visitor originalVisitor = null;
+
+//        Determine who the dragon is.
+        for (Enclosable dragon : creatureEnclosure) {
+            if (dragon instanceof Dragon) {
+                originalDragon = (Dragon) dragon;
+                dragonAgility = ((Dragon) dragon).getAgility();
+            }
+        }
+//        Add the agility of all the unicorns to the arraylist.
+        for (Enclosable unicorn : creatureEnclosure) {
+            if(unicorn instanceof Unicorn) {
+                unicornAgilityList.add(((Unicorn) unicorn).getAgility());
+            }
+        }
+
+//        If dragon agility is higher than highest unicorn, run a loop.
+        if (dragonAgility > Collections.max(unicornAgilityList)) {
+            while (currentNumVisitors > 0) {
+                for (Enclosable person : creatureEnclosure) {
+                    if (person instanceof Visitor) {
+                        originalVisitor = (Visitor) person;
+                    }
+                }
+                removeFromCreatureEnclosure(originalVisitor);
+                originalDragon.addToBelly(originalVisitor);
+                currentNumVisitors = countVisitorsInCreatureEnclosure();
+            }
+        }
+//        If highest unicorn agility is higher than dragon agility, run a loop.
+        else if (Collections.max(unicornAgilityList) > dragonAgility) {
+            while (currentNumVisitors > 0) {
+                for (Enclosable person : creatureEnclosure) {
+                    if (person instanceof Visitor) {
+                        originalVisitor = (Visitor) person;
+                    }
+                }
+                originalVisitor.money = originalVisitor.money + 10;
+                removeFromCreatureEnclosure(originalVisitor);
+                currentNumVisitors = countVisitorsInCreatureEnclosure();
+            }
+        }
+    }
 
 
 }

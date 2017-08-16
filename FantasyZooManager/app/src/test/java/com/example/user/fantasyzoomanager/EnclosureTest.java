@@ -97,30 +97,25 @@ public class EnclosureTest {
     @Test
     public void creatureEnclosureIsOccupied() {
         unicornEnclosure.addToCreatureEnclosure(visitor1);
-        System.out.println(unicornEnclosure.countCreatures());
         assertEquals(1, unicornEnclosure.countCreatures());
     }
 
     @Test
     public void removeCreatureFromEnclosure() {
         unicornEnclosure.addToCreatureEnclosure(visitor1);
-        System.out.println(unicornEnclosure.countCreatures());
         unicornEnclosure.removeFromCreatureEnclosure(visitor1);
-        System.out.println(unicornEnclosure.countCreatures());
         assertEquals(0, unicornEnclosure.countCreatures());
     }
 
     @Test
     public void visitorSeatingIsOccupied() {
         unicornEnclosure.addToVisitorSeating(visitor1);
-        System.out.println(unicornEnclosure.countVisitors());
         assertEquals(1, unicornEnclosure.countVisitors());
     }
 
     @Test
     public void removeVisitorFromSeating() {
         unicornEnclosure.addToVisitorSeating(visitor1);
-        System.out.println(unicornEnclosure.countVisitors());
         unicornEnclosure.removeVisitorFromSeating(visitor1);
         System.out.println(unicornEnclosure.countVisitors());
         assertEquals(0, unicornEnclosure.countVisitors());
@@ -300,6 +295,71 @@ public class EnclosureTest {
         assertEquals(2, dragon5.countBelly());
     }
 
+    @Test
+    public void resolveVisitorsInGenPopV2UnicornsWin() {
+        genPop.addCreatureToEnclosureCheckPredator(dragon3);
 
+        // addCreatureToEnclosureCheckPredator should prevent a second predator being added.
+
+        genPop.addCreatureToEnclosureCheckPredator(dragon4);
+        genPop.addCreatureToEnclosureCheckPredator(unicorn3);
+        genPop.addCreatureToEnclosureCheckPredator(unicorn4);
+        assertEquals(3, genPop.countCreatures());
+
+        assertEquals(3, visitor4.visitorFunds());
+        genPop.addVisitorToSeatingAndPay(visitor4);
+        genPop.addVisitorToSeatingAndPay(visitor5);
+        genPop.addVisitorToSeatingAndPay(visitor6);
+        assertEquals(3, genPop.countVisitors());
+        assertEquals(0, visitor4.visitorFunds());
+
+        genPop.removeVisitorIfTheyHaveMoney(visitor4);
+        genPop.removeVisitorIfTheyHaveMoney(visitor5);
+        genPop.removeVisitorIfTheyHaveMoney(visitor6);
+        assertEquals(0, genPop.countVisitors());
+        assertEquals(5, genPop.countCreatures());
+
+        genPop.resolveVisitorsInGenPopV2();
+        assertEquals(3, genPop.countCreatures());
+
+        assertEquals(10, visitor4.visitorFunds());
+        assertEquals(10, visitor5.visitorFunds());
+
+        assertEquals(0, dragon3.countBelly());
+
+    }
+
+    @Test
+    public void resolveVisitorsInGenPopV2DragonsWin() {
+        genPop.addCreatureToEnclosureCheckPredator(dragon5);
+
+        //  addCreatureToEnclosureCheckPredator should prevent a second predator being added.
+
+        genPop.addCreatureToEnclosureCheckPredator(dragon6);
+        genPop.addCreatureToEnclosureCheckPredator(unicorn5);
+        genPop.addCreatureToEnclosureCheckPredator(unicorn6);
+        assertEquals(3, genPop.countCreatures());
+
+        assertEquals(3, visitor7.visitorFunds());
+        genPop.addVisitorToSeatingAndPay(visitor7);
+        genPop.addVisitorToSeatingAndPay(visitor8);
+        genPop.addVisitorToSeatingAndPay(visitor9);
+        assertEquals(3, genPop.countVisitors());
+        assertEquals(0, visitor7.visitorFunds());
+
+        genPop.removeVisitorIfTheyHaveMoney(visitor7);
+        genPop.removeVisitorIfTheyHaveMoney(visitor8);
+        genPop.removeVisitorIfTheyHaveMoney(visitor9);
+        assertEquals(0, genPop.countVisitors());
+        assertEquals(5, genPop.countCreatures());
+
+        genPop.resolveVisitorsInGenPopV2();
+        assertEquals(3, genPop.countCreatures());
+
+        assertEquals(0, visitor7.visitorFunds());
+        assertEquals(0, visitor8.visitorFunds());
+
+        assertEquals(2, dragon5.countBelly());
+    }
 
 }

@@ -24,6 +24,12 @@ public abstract class Creature implements Enclosable {
         this.type = type;
     }
 
+//    public abstract void addToBelly();
+
+//    can't make addToBelly an abstract method even though both Unicorn and Dragon inherit it as
+//    they take in different variables.
+
+
     public String getName() {
         return this.name;
     }
@@ -39,6 +45,6 @@ public abstract class Creature implements Enclosable {
     public boolean isPredator() {
         return this.predator;
     }
-    
+
 
 }
