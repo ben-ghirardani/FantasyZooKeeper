@@ -19,10 +19,17 @@ public class EnclosureTest {
     Visitor visitor1;
     Visitor visitor2;
     Visitor visitor3;
+    Visitor visitor4;
+    Visitor visitor5;
+    Visitor visitor6;
     Dragon dragon1;
     Dragon dragon2;
+    Dragon dragon3;
+    Dragon dragon4;
     Unicorn unicorn1;
     Unicorn unicorn2;
+    Unicorn unicorn3;
+    Unicorn unicorn4;
 
     @Before
     public void before() {
@@ -32,10 +39,17 @@ public class EnclosureTest {
         visitor1 = new Visitor ("Frank", 7, 5, false);
         visitor2 = new Visitor ("Mary", 6, 9, false);
         visitor3 = new Visitor ("Melody", 45, 16, false);
+        visitor4 = new Visitor("Chris", 4, 10, false);
+        visitor5 = new Visitor("Sophie", 5, 9, false);
+        visitor6 = new Visitor("Tina", 6, 8, false);
         dragon1 = new Dragon(15, true, "Edward", "Dragon");
         dragon2 = new Dragon(14, true, "Fabian", "Dragon");
+        dragon3 = new Dragon(19, true, "Lesley", "Dragon");
+        dragon4 = new Dragon(18, true, "Emily", "Dragon");
         unicorn1 = new Unicorn(20, false, "Samantha", "Unicorn");
         unicorn2 = new Unicorn(21, false, "Clive", "Unicorn");
+        unicorn3 = new Unicorn(21,false, "Elizabeth", "Unicorn");
+        unicorn4 = new Unicorn(20, false, "Barry", "Unicorn");
     }
 
     @Test
@@ -199,12 +213,16 @@ public class EnclosureTest {
 
     @Test
     public void resolveVisitorsInGenPop() {
-        genPop.addCreatureToEnclosureCheckPredator(dragon1);
-        genPop.addCreatureToEnclosureCheckPredator(dragon2);
-        genPop.addCreatureToEnclosureCheckPredator(unicorn1);
-        genPop.addCreatureToEnclosureCheckPredator(unicorn2);
-        assertEquals(3, genPop.countCreatures());
-        genPop.resolveVisitorsInGenPop();
+        genPop.addCreatureToEnclosureCheckPredator(dragon3);
+        genPop.addCreatureToEnclosureCheckPredator(dragon4);
+        genPop.addCreatureToEnclosureCheckPredator(unicorn3);
+        genPop.addCreatureToEnclosureCheckPredator(unicorn4);
+        genPop.addToCreatureEnclosure(visitor4);
+        genPop.addToCreatureEnclosure(visitor5);
+        genPop.addToCreatureEnclosure(visitor6);
+        assertEquals(6, genPop.countCreatures());
+
+        need to add people correctly.
     }
 
 

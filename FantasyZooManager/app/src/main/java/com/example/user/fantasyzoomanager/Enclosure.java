@@ -273,12 +273,46 @@ public class Enclosure {
                     }
                 }
                 while (currentNumVisitors > 0) {
-                    for (Enclosable person : )
+                    for (Enclosable person : creatureEnclosure) {
+                        if (person instanceof Visitor) {
+                            originalVisitor = (Visitor) person;
+                        }
+                    }
+                    removeFromCreatureEnclosure(originalVisitor);
+                    originalDragon.addToBelly(originalVisitor);
+                    currentNumVisitors = countVisitorsInCreatureEnclosure();
                 }
+            }
+            else if (unicornAgility > dragonAgility) {
+                for (Enclosable person : creatureEnclosure) {
+                    if (person instanceof Visitor) {
+                        originalVisitor = (Visitor) person;
+                    }
+                }
+                originalVisitor.money = originalVisitor.money + 10;
+                removeFromCreatureEnclosure(originalVisitor);
+                currentNumVisitors = countVisitorsInCreatureEnclosure();
             }
     }
 //    this is the last line.
 
+
+//    public void resolveVisitorsInUnicornEnclosure() {
+//        int currentNumVisitors = countVisitorsInCreatureEnclosure();
+//        int currentNumUnicorns = countUnicornsInCreatureEnclosure();
+//        Visitor originalVisitor = null;
+//        while (currentNumVisitors > 0 &&  currentNumUnicorns > 0) {
+//            for (Enclosable person : creatureEnclosure) {
+//                if (person instanceof Visitor) {
+//                    originalVisitor = (Visitor) person;
+//                }
+//            }
+//            originalVisitor.money = originalVisitor.money + 10;
+//            removeFromCreatureEnclosure(originalVisitor);
+//            currentNumVisitors = countVisitorsInCreatureEnclosure();
+//            currentNumUnicorns = countUnicornsInCreatureEnclosure();
+//        }
+//    }
 
 
 //    public void resolveVisitorsInDragonEnclosure() {
