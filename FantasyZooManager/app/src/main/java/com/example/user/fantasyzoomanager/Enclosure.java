@@ -1,6 +1,7 @@
 package com.example.user.fantasyzoomanager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by user on 10/08/2017.
@@ -104,8 +105,8 @@ public class Enclosure {
         }
     }
 
-//    Method to check visitor funds, release them if they have enough money, transfer them to the
-//    creature enclosure if not.
+//    Method to check visitor funds on leaving an enclosure, release them if they have enough money,
+//    transfer them to the creature enclosure if not.
 
     public String removeVisitorIfTheyHaveMoney(Visitor visitor) {
         if (visitor.visitorFunds() <= 0) {
@@ -129,7 +130,6 @@ public class Enclosure {
         }
         return numberOfDragons;
     }
-
 
     //    Check for instances of a predator. Cast them into their original form and record their
     //    agility. Check for instances of Visitors. If their agility is less than the predator
@@ -185,21 +185,128 @@ public class Enclosure {
         }
     }
 
-
-
     //  Create a loop similar to the one above for the Unicorn enclosure. Unicorns are nice so
     //  they will assist visitors instead of eating them.
 
-    public void  resolveVisitorsInUnicornEnclosure() {
-        int currentNumVisitors = 0;
-        Visitor originalVisitor = null;
+    //  Create a method to loop through arraylist and count visitors for use in unicorn enclosure
+    //  method.
+
+    public int countVisitorsInCreatureEnclosure() {
+        int numVisitors = 0;
         for (Enclosable person : creatureEnclosure) {
             if (person instanceof Visitor) {
-                currentNumVisitors++;
+                numVisitors++;
             }
+        }
+        return numVisitors;
+    }
+
+    public int countUnicornsInCreatureEnclosure() {
+        int numUnicorns = 0;
+        for (Enclosable creature : creatureEnclosure) {
+            if (creature instanceof Unicorn) {
+                numUnicorns++;
+            }
+        }
+        return numUnicorns;
+    }
+
+    public int countDragonsInCreatureEnclosure() {
+        int numDragons = 0;
+        for (Enclosable creature : creatureEnclosure) {
+            if (creature instanceof Dragon) {
+                numDragons++;
+            }
+        }
+        return numDragons;
+    }
+
+    // Unicorns provide people with money and send them on their way if they get placed
+    // in the creatureEnclosure arraylist.
+
+    public void resolveVisitorsInUnicornEnclosure() {
+        int currentNumVisitors = countVisitorsInCreatureEnclosure();
+        int currentNumUnicorns = countUnicornsInCreatureEnclosure();
+        Visitor originalVisitor = null;
+        while (currentNumVisitors > 0 &&  currentNumUnicorns > 0) {
+            for (Enclosable person : creatureEnclosure) {
+                if (person instanceof Visitor) {
+                    originalVisitor = (Visitor) person;
+                }
+            }
+            originalVisitor.money = originalVisitor.money + 10;
+            removeFromCreatureEnclosure(originalVisitor);
+            currentNumVisitors = countVisitorsInCreatureEnclosure();
+            currentNumUnicorns = countUnicornsInCreatureEnclosure();
         }
     }
 
+    // Write a unifying method that takes in a dragon and a few unicorns, and compares agility
+    // to see whether visitors are eaten or provided with money.
+
+    public void resolveVisitorsInGenPop() {
+        int currentNumVisitors = countVisitorsInCreatureEnclosure();
+        int currentNumUnicorns = countUnicornsInCreatureEnclosure();
+        int currentNumDragons = countDragonsInCreatureEnclosure();
+        int dragonAgility = 0;
+        ArrayList<Integer> unicornAgilityList = new ArrayList<>();
+        int unicornAgility = 0;
+        Dragon originalDragon = null;
+        Visitor originalVisitor = null;
+            for (Enclosable dragon : creatureEnclosure) {
+                if (dragon instanceof Dragon) {
+                    originalDragon = (Dragon) dragon;
+                    dragonAgility = ((Dragon) dragon).getAgility();
+                }
+            }
+            for (Enclosable unicorn : creatureEnclosure) {
+                if(unicorn instanceof Unicorn) {
+                    unicornAgilityList.add(((Unicorn) unicorn).getAgility());
+                    unicornAgility = Collections.max(unicornAgilityList);
+
+                }
+            }
+            if (dragonAgility > unicornAgility) {
+                for (Enclosable beast : creatureEnclosure) {
+                    if (beast instanceof Dragon) {
+                        originalDragon = (Dragon) beast;
+                    }
+                }
+                while (currentNumVisitors > 0) {
+                    for (Enclosable person : )
+                }
+            }
+    }
+//    this is the last line.
+
+
+
+//    public void resolveVisitorsInDragonEnclosure() {
+//        int currentOccupants = countCreatures();
+//        int predatorAgility = 0;
+//        Dragon originalDragon = null;
+//        Visitor originalVisitor = null;
+//        for (Enclosable beast : creatureEnclosure) {
+//            if (beast instanceof Dragon) {
+//                originalDragon = (Dragon) beast;
+//                predatorAgility = originalDragon.getAgility();
+//            }
+//        }
+//        while (currentOccupants > 1) {
+//            for (Enclosable person : creatureEnclosure) {
+//                if (person instanceof Visitor) {
+//                    originalVisitor = (Visitor) person;
+//                }
+//            }
+//            if (originalVisitor.visitorAgility() <= predatorAgility && originalVisitor != null) {
+//                removeFromCreatureEnclosure(originalVisitor);
+//                originalDragon.addToBelly(originalVisitor);
+//                currentOccupants = countCreatures();
+//            } else {
+//                creatureEnclosure.remove(originalVisitor);
+//            }
+//        }
+//    }
 
 
 }

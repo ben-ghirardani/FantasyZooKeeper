@@ -15,21 +15,27 @@ public class EnclosureTest {
 
     Enclosure unicornEnclosure;
     Enclosure dragonEnclosure;
+    Enclosure genPop;
     Visitor visitor1;
     Visitor visitor2;
     Visitor visitor3;
     Dragon dragon1;
     Dragon dragon2;
+    Unicorn unicorn1;
+    Unicorn unicorn2;
 
     @Before
     public void before() {
         unicornEnclosure = new Enclosure("Unicorn Enclosure", 5);
         dragonEnclosure = new Enclosure("Dragon Enclosure", 7);
+        genPop = new Enclosure("Enclosure 17", 3);
         visitor1 = new Visitor ("Frank", 7, 5, false);
         visitor2 = new Visitor ("Mary", 6, 9, false);
         visitor3 = new Visitor ("Melody", 45, 16, false);
         dragon1 = new Dragon(15, true, "Edward", "Dragon");
         dragon2 = new Dragon(14, true, "Fabian", "Dragon");
+        unicorn1 = new Unicorn(20, false, "Samantha", "Unicorn");
+        unicorn2 = new Unicorn(21, false, "Clive", "Unicorn");
     }
 
     @Test
@@ -149,6 +155,58 @@ public class EnclosureTest {
         assertEquals(2, dragon1.countBelly());
         assertEquals(1, dragonEnclosure.countCreatures());
     }
+
+    @Test
+    public void countVisitorsInCreatureEnclosure() {
+        unicornEnclosure.addToCreatureEnclosure(visitor1);
+        unicornEnclosure.addToCreatureEnclosure(visitor2);
+        unicornEnclosure.addToCreatureEnclosure(visitor3);
+        unicornEnclosure.addToCreatureEnclosure(unicorn1);
+        unicornEnclosure.addToCreatureEnclosure(unicorn2);
+        assertEquals(3, unicornEnclosure.countVisitorsInCreatureEnclosure());
+        assertEquals(2, unicornEnclosure.countUnicornsInCreatureEnclosure());
+    }
+
+    @Test
+    public void countDragonsInCreatureEnclosure() {
+        dragonEnclosure.addToCreatureEnclosure(dragon1);
+        assertEquals(1, dragonEnclosure.countDragonsInCreatureEnclosure());
+    }
+
+    @Test
+    public void resolveVisitorsInUnicornEnclosure() {
+        unicornEnclosure.addToCreatureEnclosure(visitor1);
+        unicornEnclosure.addToCreatureEnclosure(visitor2);
+        unicornEnclosure.addToCreatureEnclosure(visitor3);
+        unicornEnclosure.addToCreatureEnclosure(unicorn1);
+        unicornEnclosure.addToCreatureEnclosure(unicorn2);
+        assertEquals(3, unicornEnclosure.countVisitorsInCreatureEnclosure());
+        assertEquals(2, unicornEnclosure.countUnicornsInCreatureEnclosure());
+        unicornEnclosure.resolveVisitorsInUnicornEnclosure();
+        assertEquals(2, unicornEnclosure.countUnicornsInCreatureEnclosure());
+        assertEquals(0, unicornEnclosure.countVisitorsInCreatureEnclosure());
+        assertEquals(17, visitor1.visitorFunds());
+    }
+
+    @Test
+    public void addVariousCreatures() {
+        genPop.addCreatureToEnclosureCheckPredator(dragon1);
+        genPop.addCreatureToEnclosureCheckPredator(dragon2);
+        genPop.addCreatureToEnclosureCheckPredator(unicorn1);
+        genPop.addCreatureToEnclosureCheckPredator(unicorn2);
+        assertEquals(3, genPop.countCreatures());
+    }
+
+    @Test
+    public void resolveVisitorsInGenPop() {
+        genPop.addCreatureToEnclosureCheckPredator(dragon1);
+        genPop.addCreatureToEnclosureCheckPredator(dragon2);
+        genPop.addCreatureToEnclosureCheckPredator(unicorn1);
+        genPop.addCreatureToEnclosureCheckPredator(unicorn2);
+        assertEquals(3, genPop.countCreatures());
+        genPop.resolveVisitorsInGenPop();
+    }
+
 
 
 }

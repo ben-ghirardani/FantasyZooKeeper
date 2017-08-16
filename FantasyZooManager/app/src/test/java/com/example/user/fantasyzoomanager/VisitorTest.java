@@ -31,4 +31,9 @@ public class VisitorTest {
         assertEquals(7, visitor.visitorAgility());
     }
 
+    @Test
+    public void canGetIsPredator() {
+        assertEquals(false, visitor.isPredator());
+    }
+
 }
