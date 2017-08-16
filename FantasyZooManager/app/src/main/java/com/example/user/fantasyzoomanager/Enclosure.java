@@ -246,8 +246,6 @@ public class Enclosure {
 
     public void resolveVisitorsInGenPop() {
         int currentNumVisitors = countVisitorsInCreatureEnclosure();
-        int currentNumUnicorns = countUnicornsInCreatureEnclosure();
-        int currentNumDragons = countDragonsInCreatureEnclosure();
         int dragonAgility = 0;
         ArrayList<Integer> unicornAgilityList = new ArrayList<>();
         int unicornAgility = 0;
@@ -284,6 +282,7 @@ public class Enclosure {
                 }
             }
             else if (unicornAgility > dragonAgility) {
+                while (currentNumVisitors > 0) {
                 for (Enclosable person : creatureEnclosure) {
                     if (person instanceof Visitor) {
                         originalVisitor = (Visitor) person;
@@ -292,55 +291,12 @@ public class Enclosure {
                 originalVisitor.money = originalVisitor.money + 10;
                 removeFromCreatureEnclosure(originalVisitor);
                 currentNumVisitors = countVisitorsInCreatureEnclosure();
+                }
             }
     }
-//    this is the last line.
 
+    //  Try and re-write the method above to be much more simple.
 
-//    public void resolveVisitorsInUnicornEnclosure() {
-//        int currentNumVisitors = countVisitorsInCreatureEnclosure();
-//        int currentNumUnicorns = countUnicornsInCreatureEnclosure();
-//        Visitor originalVisitor = null;
-//        while (currentNumVisitors > 0 &&  currentNumUnicorns > 0) {
-//            for (Enclosable person : creatureEnclosure) {
-//                if (person instanceof Visitor) {
-//                    originalVisitor = (Visitor) person;
-//                }
-//            }
-//            originalVisitor.money = originalVisitor.money + 10;
-//            removeFromCreatureEnclosure(originalVisitor);
-//            currentNumVisitors = countVisitorsInCreatureEnclosure();
-//            currentNumUnicorns = countUnicornsInCreatureEnclosure();
-//        }
-//    }
-
-
-//    public void resolveVisitorsInDragonEnclosure() {
-//        int currentOccupants = countCreatures();
-//        int predatorAgility = 0;
-//        Dragon originalDragon = null;
-//        Visitor originalVisitor = null;
-//        for (Enclosable beast : creatureEnclosure) {
-//            if (beast instanceof Dragon) {
-//                originalDragon = (Dragon) beast;
-//                predatorAgility = originalDragon.getAgility();
-//            }
-//        }
-//        while (currentOccupants > 1) {
-//            for (Enclosable person : creatureEnclosure) {
-//                if (person instanceof Visitor) {
-//                    originalVisitor = (Visitor) person;
-//                }
-//            }
-//            if (originalVisitor.visitorAgility() <= predatorAgility && originalVisitor != null) {
-//                removeFromCreatureEnclosure(originalVisitor);
-//                originalDragon.addToBelly(originalVisitor);
-//                currentOccupants = countCreatures();
-//            } else {
-//                creatureEnclosure.remove(originalVisitor);
-//            }
-//        }
-//    }
 
 
 }

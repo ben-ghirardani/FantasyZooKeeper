@@ -35,19 +35,22 @@ public class EnclosureTest {
     public void before() {
         unicornEnclosure = new Enclosure("Unicorn Enclosure", 5);
         dragonEnclosure = new Enclosure("Dragon Enclosure", 7);
-        genPop = new Enclosure("Enclosure 17", 3);
         visitor1 = new Visitor ("Frank", 7, 5, false);
         visitor2 = new Visitor ("Mary", 6, 9, false);
         visitor3 = new Visitor ("Melody", 45, 16, false);
-        visitor4 = new Visitor("Chris", 4, 10, false);
-        visitor5 = new Visitor("Sophie", 5, 9, false);
-        visitor6 = new Visitor("Tina", 6, 8, false);
         dragon1 = new Dragon(15, true, "Edward", "Dragon");
         dragon2 = new Dragon(14, true, "Fabian", "Dragon");
-        dragon3 = new Dragon(19, true, "Lesley", "Dragon");
-        dragon4 = new Dragon(18, true, "Emily", "Dragon");
         unicorn1 = new Unicorn(20, false, "Samantha", "Unicorn");
         unicorn2 = new Unicorn(21, false, "Clive", "Unicorn");
+        genPop = new Enclosure("Enclosure 17", 3);
+
+        // Final Test Subjects
+
+        visitor4 = new Visitor("Chris", 3, 10, false);
+        visitor5 = new Visitor("Sophie", 3, 9, false);
+        visitor6 = new Visitor("Tina", 6, 8, false);
+        dragon3 = new Dragon(19, true, "Lesley", "Dragon");
+        dragon4 = new Dragon(18, true, "Emily", "Dragon");
         unicorn3 = new Unicorn(21,false, "Elizabeth", "Unicorn");
         unicorn4 = new Unicorn(20, false, "Barry", "Unicorn");
     }
@@ -217,12 +220,23 @@ public class EnclosureTest {
         genPop.addCreatureToEnclosureCheckPredator(dragon4);
         genPop.addCreatureToEnclosureCheckPredator(unicorn3);
         genPop.addCreatureToEnclosureCheckPredator(unicorn4);
-        genPop.addToCreatureEnclosure(visitor4);
-        genPop.addToCreatureEnclosure(visitor5);
-        genPop.addToCreatureEnclosure(visitor6);
-        assertEquals(6, genPop.countCreatures());
+        assertEquals(3, genPop.countCreatures());
 
-        need to add people correctly.
+        assertEquals(3, visitor4.visitorFunds());
+        genPop.addVisitorToSeatingAndPay(visitor4);
+        genPop.addVisitorToSeatingAndPay(visitor5);
+        genPop.addVisitorToSeatingAndPay(visitor6);
+        assertEquals(3, genPop.countVisitors());
+        assertEquals(0, visitor4.visitorFunds());
+
+        genPop.removeVisitorIfTheyHaveMoney(visitor4);
+        genPop.removeVisitorIfTheyHaveMoney(visitor5);
+        genPop.removeVisitorIfTheyHaveMoney(visitor6);
+        assertEquals(0, genPop.countVisitors());
+        assertEquals(5, genPop.countCreatures());
+
+        genPop.resolveVisitorsInGenPop();
+        assertEquals(3, genPop.countCreatures());
     }
 
 
