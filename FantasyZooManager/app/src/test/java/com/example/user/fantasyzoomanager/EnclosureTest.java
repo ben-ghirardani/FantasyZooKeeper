@@ -22,14 +22,22 @@ public class EnclosureTest {
     Visitor visitor4;
     Visitor visitor5;
     Visitor visitor6;
+    Visitor visitor7;
+    Visitor visitor8;
+    Visitor visitor9;
     Dragon dragon1;
     Dragon dragon2;
     Dragon dragon3;
     Dragon dragon4;
+    Dragon dragon5;
+    Dragon dragon6;
     Unicorn unicorn1;
     Unicorn unicorn2;
     Unicorn unicorn3;
     Unicorn unicorn4;
+    Unicorn unicorn5;
+    Unicorn unicorn6;
+
 
     @Before
     public void before() {
@@ -44,7 +52,7 @@ public class EnclosureTest {
         unicorn2 = new Unicorn(21, false, "Clive", "Unicorn");
         genPop = new Enclosure("Enclosure 17", 3);
 
-        // Final Test Subjects
+        // Final Test Subjects (Unicorns Win)
 
         visitor4 = new Visitor("Chris", 3, 10, false);
         visitor5 = new Visitor("Sophie", 3, 9, false);
@@ -53,6 +61,17 @@ public class EnclosureTest {
         dragon4 = new Dragon(18, true, "Emily", "Dragon");
         unicorn3 = new Unicorn(21,false, "Elizabeth", "Unicorn");
         unicorn4 = new Unicorn(20, false, "Barry", "Unicorn");
+
+        // Final Test Subjects (Dragons Win)
+
+        visitor7 = new Visitor("Phillip", 3, 10, false);
+        visitor8 = new Visitor("Zoe", 3, 9, false);
+        visitor9 = new Visitor("Ian", 6, 8, false);
+        dragon5 = new Dragon(25, true, "Lauren", "Dragon");
+        dragon6 = new Dragon(18, true, "Erik", "Dragon");
+        unicorn5 = new Unicorn(17,false, "Sky", "Unicorn");
+        unicorn6 = new Unicorn(18, false, "Theo", "Unicorn");
+
     }
 
     @Test
@@ -215,8 +234,11 @@ public class EnclosureTest {
     }
 
     @Test
-    public void resolveVisitorsInGenPop() {
+    public void resolveVisitorsInGenPopUnicornsWin() {
         genPop.addCreatureToEnclosureCheckPredator(dragon3);
+
+        // addCreatureToEnclosureCheckPredator should prevent a second predator being added.
+
         genPop.addCreatureToEnclosureCheckPredator(dragon4);
         genPop.addCreatureToEnclosureCheckPredator(unicorn3);
         genPop.addCreatureToEnclosureCheckPredator(unicorn4);
@@ -237,6 +259,45 @@ public class EnclosureTest {
 
         genPop.resolveVisitorsInGenPop();
         assertEquals(3, genPop.countCreatures());
+
+        assertEquals(10, visitor4.visitorFunds());
+        assertEquals(10, visitor5.visitorFunds());
+
+        assertEquals(0, dragon3.countBelly());
+
+    }
+
+    @Test
+    public void resolveVisitorsInGenPopDragonsWin() {
+        genPop.addCreatureToEnclosureCheckPredator(dragon5);
+
+        //  addCreatureToEnclosureCheckPredator should prevent a second predator being added.
+
+        genPop.addCreatureToEnclosureCheckPredator(dragon6);
+        genPop.addCreatureToEnclosureCheckPredator(unicorn5);
+        genPop.addCreatureToEnclosureCheckPredator(unicorn6);
+        assertEquals(3, genPop.countCreatures());
+
+        assertEquals(3, visitor7.visitorFunds());
+        genPop.addVisitorToSeatingAndPay(visitor7);
+        genPop.addVisitorToSeatingAndPay(visitor8);
+        genPop.addVisitorToSeatingAndPay(visitor9);
+        assertEquals(3, genPop.countVisitors());
+        assertEquals(0, visitor7.visitorFunds());
+
+        genPop.removeVisitorIfTheyHaveMoney(visitor7);
+        genPop.removeVisitorIfTheyHaveMoney(visitor8);
+        genPop.removeVisitorIfTheyHaveMoney(visitor9);
+        assertEquals(0, genPop.countVisitors());
+        assertEquals(5, genPop.countCreatures());
+
+        genPop.resolveVisitorsInGenPop();
+        assertEquals(3, genPop.countCreatures());
+
+        assertEquals(0, visitor7.visitorFunds());
+        assertEquals(0, visitor8.visitorFunds());
+
+        assertEquals(2, dragon5.countBelly());
     }
 
 

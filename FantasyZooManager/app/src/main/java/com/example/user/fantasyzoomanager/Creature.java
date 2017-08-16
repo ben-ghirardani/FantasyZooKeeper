@@ -36,26 +36,9 @@ public abstract class Creature implements Enclosable {
         return this.type;
     }
 
-//    public void addToBelly(Enclosable morsel) {
-//        belly.add(morsel);
-//    }
-//
-//    public void removeFromBelly(Enclosable morsel) {
-//        belly.remove(morsel);
-//    }
-
     public boolean isPredator() {
         return this.predator;
     }
-
-    public int countBelly() {
-        int count = 0;
-        for (Enclosable enclosable : belly) {
-            if (enclosable != null) {
-                count++;
-            }
-        }
-        return count;
-    }
+    
 
 }
