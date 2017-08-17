@@ -9,10 +9,12 @@ import java.util.ArrayList;
 public class Unicorn extends Creature {
 
     public ArrayList<Vegetable> belly;
+    public String vegChoice;
 
-    public Unicorn(int agility, boolean predator, String name, String type) {
+    public Unicorn(int agility, boolean predator, String name, String type, String vegChoice) {
         super(agility, predator, name, type);
         this.belly = new ArrayList<Vegetable>();
+        this.vegChoice = vegChoice;
     }
 
     public void addToBelly(Vegetable veg) {
@@ -21,6 +23,10 @@ public class Unicorn extends Creature {
 
     public void removeFromBelly(Vegetable veg) {
         belly.remove(veg);
+    }
+
+    public String getVegChoice() {
+        return this.vegChoice;
     }
 
     public int countBelly() {

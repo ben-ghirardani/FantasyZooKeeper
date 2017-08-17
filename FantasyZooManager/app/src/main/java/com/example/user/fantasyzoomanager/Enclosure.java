@@ -15,12 +15,14 @@ public class Enclosure {
     private int price;
     private ArrayList<Enclosable> creatureEnclosure;
     private ArrayList<Visitor> visitorSeating;
+    private ArrayList<Vegetable> foodTrough;
 
     public Enclosure(String name, int price) {
         this.name = name;
         this.price = price;
         this.creatureEnclosure = new ArrayList<Enclosable>();
         this.visitorSeating = new ArrayList<Visitor>();
+        this.foodTrough = new ArrayList<Vegetable>();
     }
 
     public String getName() {
@@ -51,6 +53,16 @@ public class Enclosure {
         return count;
     }
 
+    public int countVegetables() {
+        int count = 0;
+        for (Vegetable veg : foodTrough) {
+            if(veg != null) {
+                count++;
+            }
+        }
+        return count;
+    }
+
 //    Standard add and remove methods.
 
     public void addToCreatureEnclosure(Enclosable entity) {
@@ -67,6 +79,14 @@ public class Enclosure {
 
     public void removeVisitorFromSeating(Visitor visitor) {
         visitorSeating.remove(visitor);
+    }
+
+    public void addVegetableToFoodTrough(Vegetable veg) {
+        foodTrough.add(veg);
+    }
+
+    public void removeVegetableFromFoodTrough(Vegetable veg) {
+        foodTrough.remove(veg);
     }
 
 //    Method to add a Visitor and remove funds from them based on Enclosure price.
@@ -118,6 +138,8 @@ public class Enclosure {
             return visitor.getName() + " has left the enclosure and still has money to spend.";
         }
     }
+
+
 
 //    This is a test method to check the functionality of the 'instance of' operator.
 
@@ -245,7 +267,7 @@ public class Enclosure {
     // to see whether visitors are eaten or provided with money. First attempt, hacked together
     // from several other methods, could be more concise.
 
-    public void resolveVisitorsInGenPop() {
+    public void resolveVisitorsInMixedEnclosure() {
         int currentNumVisitors = countVisitorsInCreatureEnclosure();
         int dragonAgility = 0;
         ArrayList<Integer> unicornAgilityList = new ArrayList<>();
@@ -296,9 +318,9 @@ public class Enclosure {
             }
     }
 
-    //  Re-write of the method above to be DRY-er.
+    //  Re-write of the method above to be a little DRY-er.
 
-    public void resolveVisitorsInGenPopV2() {
+    public void resolveVisitorsInMixedEnclosureV2() {
 //       Initialize variables.
         int currentNumVisitors = countVisitorsInCreatureEnclosure();
         int dragonAgility = 0;
@@ -349,7 +371,29 @@ public class Enclosure {
     }
 
 
+    //    While feeding trough is full and unicorn belly is less than 1 (while there's food && only 1
+//    food per unicorn).
+
+//    public void unicornFeedingTime() {
+//        Unicorn originalUnicorn = null;
+//        Vegetable originalVegetable = null;
+//        for (Enclosable creature : creatureEnclosure) {
+//            if (creature instanceof Unicorn) {
+//                Unicorn originalUnicorn = (Unicorn) creature;
+//            }
+//            for (Vegetable veg : foodTrough) {
+//                if (veg.toString() instanceof originalUnicorn.vegChoice()) {
+//
+//                }
+//            }
+//        }
+//
+//    }
+
+
 }
+
+
 
 
 

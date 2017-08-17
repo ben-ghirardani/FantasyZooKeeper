@@ -17,7 +17,7 @@ public class UnicornTest {
 
     @Before
     public void before() {
-        unicorn = new Unicorn (8, false, "Larry", "Unicorn");
+        unicorn = new Unicorn (8, false, "Larry", "Unicorn", "Carrot");
         visitor1 = new Visitor ("Frank", 10, 5, false);
         carrot = new Carrot("Carrot");
     }
@@ -59,6 +59,11 @@ public class UnicornTest {
         unicorn.addToBelly(carrot);
         unicorn.removeFromBelly(carrot);
         assertEquals(0, unicorn.countBelly());
+    }
+
+    @Test
+    public void canGetVegChoice() {
+        assertEquals("Carrot", unicorn.getVegChoice());
     }
 
 

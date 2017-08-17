@@ -9,18 +9,18 @@ import static junit.framework.Assert.assertEquals;
  * Created by user on 16/08/2017.
  */
 
-public class CarrotTest {
+public class CauliflowerTest {
 
-    Carrot carrot;
+    Cauliflower cauliflower;
 
     @Before
     public void before() {
-        carrot = new Carrot("Carrot");
+        cauliflower = new Cauliflower("Cauliflower");
     }
 
     @Test
-    public void checkThatThisCarrotIsACarrot() {
-        assertEquals("Carrot", carrot.getType());
+    public void checkThatThisCauliflowerIsACarrot() {
+        assertEquals("Cauliflower", cauliflower.getType());
     }
 
 
